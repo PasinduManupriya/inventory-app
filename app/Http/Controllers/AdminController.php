@@ -28,4 +28,16 @@ class AdminController extends Controller
         $category->delete();
         return redirect()->back();
     }
+
+    public function update_category($id){
+        $categories = Category::findOrfail($id);
+        return view('admin.upadate_category', compact('categories'));
+    }
+
+    public function save_category(Request $request , $id){
+        $categories = Category::findOrfail($id);
+        $categories->category_name = $request->update_category;
+        $categories->save();
+        return redirect('/viewcategory');
+    }
 }

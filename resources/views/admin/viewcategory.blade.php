@@ -17,6 +17,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category Id</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category Name</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Delete Category</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Update Category</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -24,7 +25,8 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$category->id}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$category->category_name}}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.delete_category',$category->id)}}" style="background-color:red; color:white; padding:5px; border-radius: 8px;">Delete</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.delete_category',$category->id)}}" style="background-color:red; color:white; padding:5px; border-radius: 8px; border-radius: 10px;">Delete</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.update_category',$category->id)}}" style="background-color:green; color:white; padding:5px; border-radius: 8px; border-radius: 10px;">Update</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

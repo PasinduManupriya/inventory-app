@@ -9,8 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// user controller start here
+
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+// user controller end here 
+
+
+// admin controller start here
 
 Route::middleware(['auth','admin'])->group(function () {
     Route::get('/addcategory', [AdminController::class, 'addCategory'])->name('admin.addcategory');
@@ -23,6 +30,18 @@ Route::get('/viewcategory', [AdminController::class, 'viewcategory'])->middlewar
 Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])->middleware(['auth', 'verified'])
     ->name('admin.delete_category');
 
+Route::get('/update_category/{id}', [AdminController::class, 'update_category'])->middleware(['auth' , 'verified'])
+    ->name('admin.update_category');
+
+Route::post('/save_category/{id}', [AdminController::class, 'save_category'])->middleware(['auth' , 'verified'])
+    ->name('admin.save_category');
+
+
+// admin controller end here 
+
+
+// profile controller start here 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,3 +49,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// profile controller end here 
