@@ -36,6 +36,11 @@ Route::get('/update_category/{id}', [AdminController::class, 'update_category'])
 Route::post('/save_category/{id}', [AdminController::class, 'save_category'])->middleware(['auth' , 'verified'])
     ->name('admin.save_category');
 
+Route::get('/add_supplier' , [AdminController::class, 'add_supplier']) ->middleware(['auth' , 'verified'])
+    ->name('admin.add_supplier');
+
+Route::post('/supplier_save' , [AdminController::class, 'supplier_save']) ->name('admin.supplier_save');
+
 
 // admin controller end here 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Supplier;
 
 class AdminController extends Controller
 {
@@ -39,5 +40,17 @@ class AdminController extends Controller
         $categories->category_name = $request->update_category;
         $categories->save();
         return redirect('/viewcategory');
+    }
+
+    public function add_supplier(){
+        return view('admin.add_supplier');
+    }
+
+    public function supplier_save(Request $request){
+        $supplier = new Supplier();
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->supplier_conact_info = $request->supplier_contact_info;
+        $supplier->save();
+        return redirect()->back();
     }
 }
