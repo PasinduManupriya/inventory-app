@@ -41,6 +41,15 @@ Route::get('/add_supplier' , [AdminController::class, 'add_supplier']) ->middlew
 
 Route::post('/supplier_save' , [AdminController::class, 'supplier_save']) ->name('admin.supplier_save');
 
+Route::get('/view_supplier' ,[AdminController::class, 'view_supplier'])->middleware(['auth', 'verified'])
+    ->name('admin.view_supplier');
+
+Route::get('/delete_supplier/{id}' , [AdminController::class, 'delete_supplier'])->name('admin.delete_supplier');
+
+Route::get('/update_supplier/{id}', [AdminController::class, 'update_supplier'])->name('admin.update_supplier');
+
+Route::post('/supplier_new_value/{id}', [AdminController::class, 'supplier_new_value'])->name('admin.supplier_new_value');
+
 
 // admin controller end here 
 

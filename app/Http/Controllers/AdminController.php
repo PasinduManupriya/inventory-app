@@ -53,4 +53,28 @@ class AdminController extends Controller
         $supplier->save();
         return redirect()->back();
     }
+
+    public function view_supplier(){
+        $suppliers = Supplier::all();
+        return view('admin.view_supplier', compact('suppliers'));
+    }
+
+    public function delete_supplier($id){
+        $supplier = Supplier::findOrFail($id);
+        $supplier->delete();
+        return redirect()->back();
+    }
+
+    public function update_supplier($id){
+        $suppliers = Supplier::findOrFail($id);
+        return view('admin.update_supplier', compact('suppliers'));
+    }
+
+    public function supplier_new_value(Request $request, $id){
+        $supplier = Supplier::findOrFail($id);
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->supplier_conact_info = $request->supplier_contact_info;
+        $supplier->save();
+        return redirect('/view_supplier');
+    }
 }
