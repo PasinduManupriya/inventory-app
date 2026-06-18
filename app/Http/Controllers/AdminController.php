@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -76,5 +77,32 @@ class AdminController extends Controller
         $supplier->supplier_conact_info = $request->supplier_contact_info;
         $supplier->save();
         return redirect('/view_supplier');
+    }
+
+    public function add_product(){
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view('admin.add_product', compact('categories', 'suppliers'));
+    }
+
+    public function store_product(Request $request){
+        $product = new Product();
+
+        $product->product_name = $request->product_name;
+        $product->product_quantity = $request->product_quantity;
+        $product->product_price = $request->product_price;
+        $product->product_category = $request->product_category;
+        $product->product_supplier = $request->product_supplier;
+
+        if($request->product_image){
+            $img = $request->product_image;
+            $new_img = time() . '.' . $img->getClientOriginalExtension();
+            $product->product_image = $new_img;
+            $request->product_image->move('db_img',$new_img);
+        }
+
+        $product->save();
+
+        return redirect()->back();
     }
 }

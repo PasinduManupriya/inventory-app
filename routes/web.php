@@ -50,6 +50,11 @@ Route::get('/update_supplier/{id}', [AdminController::class, 'update_supplier'])
 
 Route::post('/supplier_new_value/{id}', [AdminController::class, 'supplier_new_value'])->name('admin.supplier_new_value');
 
+Route::get('/add_product', [AdminController::class, 'add_product'])->middleware(['auth', 'verified'])
+    ->name('admin.add_product');
+
+Route::post('store_product', [AdminController::class, 'store_product'])->name('admin.store_product');
+
 
 // admin controller end here 
 
