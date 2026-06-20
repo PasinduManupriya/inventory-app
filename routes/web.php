@@ -55,6 +55,14 @@ Route::get('/add_product', [AdminController::class, 'add_product'])->middleware(
 
 Route::post('store_product', [AdminController::class, 'store_product'])->name('admin.store_product');
 
+Route::get('/view_product', [AdminController::class, 'view_product'])->name('admin.view_product');
+
+Route::get('/delete_product/{id}', [AdminController::class, 'delete_product'])->name('admin.delete_product');
+
+Route::get('/update_product/{id}', [AdminController::class, 'update_product'])->name('admin.update_product');
+
+Route::post('/update_save_value/{id}', [AdminController::class, 'update_save_value'])->name('admin.update_save_value');
+
 
 // admin controller end here 
 
