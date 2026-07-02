@@ -89,6 +89,7 @@ class AdminController extends Controller
         $product = new Product();
 
         $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
         $product->product_quantity = $request->product_quantity;
         $product->product_price = $request->product_price;
         $product->product_category = $request->product_category;
@@ -127,6 +128,7 @@ class AdminController extends Controller
     public function update_save_value(Request $request, $id){
         $product = Product::findOrFail($id);
         $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
         $product->product_quantity = $request->product_quantity;
         $product->product_price = $request->product_price;
         $product->product_category = $request->product_category;

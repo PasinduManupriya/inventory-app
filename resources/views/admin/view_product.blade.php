@@ -15,6 +15,7 @@
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">product Description</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Quantity</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product price</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Category</th>
@@ -28,6 +29,7 @@
                                 @foreach($products as $product)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_name}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_description}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_quantity}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_price}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_category}}</td>

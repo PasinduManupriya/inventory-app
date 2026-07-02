@@ -16,6 +16,10 @@
                         <input type="text" name="product_name" value="{{$products->product_name}}" style="color:black;">
                         <br>
                         <br>
+                        <label>Product Name :</label>
+                        <input type="text" name="product_description" value="{{$products->product_description}}" style="color:black;">
+                        <br>
+                        <br>
                         <label>Product Quantity :</label>
                         <input type="number" min="1" name="product_quantity" value="{{$products->product_quantity}}"  style="color:black;">
                         <br>
@@ -46,7 +50,7 @@
                         </select>
                         <br>
                         <br>
-                        <label>Product Image :</label>
+                        <label>Current Product Image :</label>
                         <img style="width:20%; height:20%" src="{{asset('db_img/' . $products->product_image)}}">
                         <br>
                         <input type="file" name="product_image">

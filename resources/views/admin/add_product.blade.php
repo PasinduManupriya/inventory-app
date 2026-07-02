@@ -16,6 +16,10 @@
                         <input type="text" name="product_name" placeholder="Enter Product Name" style="color:black;">
                         <br>
                         <br>
+                        <label>Product Description :</label>
+                        <input type="text" name="product_description" placeholder="Enter Product Description" style="color:black;">
+                        <br>
+                        <br>
                         <label>Product Quantity :</label>
                         <input type="number" min="1" name="product_quantity" placeholder="Enter Product Quantity" style="color:black;">
                         <br>
