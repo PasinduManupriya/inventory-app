@@ -63,6 +63,13 @@ Route::get('/update_product/{id}', [AdminController::class, 'update_product'])->
 
 Route::post('/update_save_value/{id}', [AdminController::class, 'update_save_value'])->name('admin.update_save_value');
 
+Route::get('/Orders', [AdminController::class, 'Orders']) ->name('admin.Orders');
+
+Route::get('/add_order/{id}', [AdminController::class, 'add_order'])->name('admin.add_order');
+
+Route::post('/update_order_quantity/{id}', [AdminController::class, 'update_order_quantity'])->name('admin.update_order_quantity');
+
+Route::get('delete_order/{id}', [AdminController::class, 'delete_order'])->name('admin.delete_order');
 
 // admin controller end here 
 

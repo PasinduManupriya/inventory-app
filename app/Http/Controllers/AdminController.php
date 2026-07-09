@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -143,5 +144,59 @@ class AdminController extends Controller
         $product->save();
         return redirect('view_product');
 
+    }
+
+    public function Orders(){
+        $products = Product::all();
+        $orders = Order::all();
+        return view('admin.order', compact('products', 'orders'));
+    }
+
+    public function add_order($id){
+        $quantity = 1;
+        $products = Product::findOrFail($id);
+        $existOrder = Order::where('product_id', $products->id)->first();
+        if($existOrder && ($products->product_quantity>=1)){
+            $existOrder->product_quantity += 1;
+            $products->product_quantity -= 1;
+            $products->save();
+            $existOrder->save();
+            return redirect('/Orders');
+        }elseif($products->product_quantity>=1){
+            $orders = new Order();
+            $orders->product_id = $products->id;
+            $orders->product_name = $products->product_name;
+            $orders->product_quantity = $quantity;
+            $orders->product_price = $products->product_price;
+            $products->product_quantity -= 1;
+            $products->save();
+            $orders->save();
+            return redirect('/Orders');
+        }else{
+            return redirect()->back()->with('error', 'Item Not Available (Out of Stock)!');
+        }
+        
+    }
+
+    public function update_order_quantity(Request $request, $id){
+        $orders = Order::findOrFail($id);
+        $p_id = $orders->product_id;
+        $products = Product::findOrFail($p_id);
+        if($products->product_quantity>=$request->quantity){
+            $orders->product_quantity = $request->quantity;
+            $products->product_quantity -= $request->quantity;
+            $orders->save();
+            $products->save();
+            return redirect('/Orders');
+        }else{
+            return redirect()->back()->with('error', 'Item Not Available (Out of Stock)!');
+        }
+        
+    }
+
+    public function delete_order($id){
+        $orders = Order::findOrFail($id);
+        $orders->delete();
+        return redirect('/Orders');
     }
 }
