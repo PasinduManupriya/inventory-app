@@ -10,6 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Category Upadate Here,") }}
+                    <div>
+                        <!-- sweetalert start -->
+                                @include ('sweetalert::alert')
+                        <!-- sweetalert end -->
+                    </div>
                     <form method="POST" action="{{route('admin.save_category' , $categories->id)}}">
                         @csrf
                         <input type="text" name="update_category" value="{{$categories->category_name}}" style="color:black;">

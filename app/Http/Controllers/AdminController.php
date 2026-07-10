@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Order;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -18,6 +19,7 @@ class AdminController extends Controller
         $category = new Category();
         $category->category_name = $request->add_category;
         $category->save();
+        Alert::success('Success!', 'Your Catergory Added Successfully.');
         return redirect()->back();
     }
 
@@ -29,6 +31,7 @@ class AdminController extends Controller
     public function delete_category($id){
         $category = Category::findOrFail($id);
         $category->delete();
+        Alert::info('Deleted!', 'Catergory Deleted Successfully.');
         return redirect()->back();
     }
 
@@ -41,6 +44,7 @@ class AdminController extends Controller
         $categories = Category::findOrfail($id);
         $categories->category_name = $request->update_category;
         $categories->save();
+        Alert::success('Updated!', 'Catergory Updated Successfully!');
         return redirect('/viewcategory');
     }
 
@@ -53,6 +57,7 @@ class AdminController extends Controller
         $supplier->supplier_name = $request->supplier_name;
         $supplier->supplier_conact_info = $request->supplier_contact_info;
         $supplier->save();
+        Alert::Success('Success!', 'Supplier Added Successfully!');
         return redirect()->back();
     }
 
@@ -64,6 +69,7 @@ class AdminController extends Controller
     public function delete_supplier($id){
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
+        Alert::info('Deleted', 'Supplier Deleted Successfully!');
         return redirect()->back();
     }
 
@@ -77,6 +83,7 @@ class AdminController extends Controller
         $supplier->supplier_name = $request->supplier_name;
         $supplier->supplier_conact_info = $request->supplier_contact_info;
         $supplier->save();
+        Alert::success('Updated!', 'Suplier Updated Successfully!');
         return redirect('/view_supplier');
     }
 
@@ -104,7 +111,7 @@ class AdminController extends Controller
         }
 
         $product->save();
-
+        Alert::Success('Success!', 'Product Added Successfully!');
         return redirect()->back();
     }
 
@@ -116,6 +123,7 @@ class AdminController extends Controller
     public function delete_product($id){
         $product = Product::findOrFail($id);
         $product->delete();
+        Alert::info('Deleted!', 'Product Deleted!');
         return redirect()->back();
     }
 
@@ -142,6 +150,7 @@ class AdminController extends Controller
             $request->product_image->move('db_img',$new_img);
         }
         $product->save();
+        Alert::Success('Updated!', 'Product Updated Successfully!');
         return redirect('view_product');
 
     }
@@ -161,6 +170,7 @@ class AdminController extends Controller
             $products->product_quantity -= 1;
             $products->save();
             $existOrder->save();
+            Alert::success('Success!', 'Item Added Order List.');
             return redirect('/Orders');
         }elseif($products->product_quantity>=1){
             $orders = new Order();
@@ -171,9 +181,11 @@ class AdminController extends Controller
             $products->product_quantity -= 1;
             $products->save();
             $orders->save();
+            Alert::success('Success!', 'Your Item Add Order List.');
             return redirect('/Orders');
         }else{
-            return redirect()->back()->with('error', 'Item Not Available (Out of Stock)!');
+            Alert::error('info!', 'Item Not Available (Out of Stock)!');
+            return redirect()->back();
         }
         
     }
@@ -183,20 +195,30 @@ class AdminController extends Controller
         $p_id = $orders->product_id;
         $products = Product::findOrFail($p_id);
         if($products->product_quantity>=$request->quantity){
+            $products->product_quantity = $products->product_quantity + $orders->product_quantity;
             $orders->product_quantity = $request->quantity;
             $products->product_quantity -= $request->quantity;
             $orders->save();
             $products->save();
+            Alert::info('Success!', 'Item Quantity Update Successfully!.');
             return redirect('/Orders');
         }else{
-            return redirect()->back()->with('error', 'Item Not Available (Out of Stock)!');
+            Alert::error('info!', 'Item Not Available (Out of Stock)!');
+            return redirect()->back();
         }
         
     }
 
     public function delete_order($id){
         $orders = Order::findOrFail($id);
+
+        $p_id = $orders->product_id;
+        $product = Product::findOrFail($p_id);
+        $quantity = $orders->product_quantity;
+        $product->product_quantity = $product->product_quantity + $quantity;
         $orders->delete();
+        $product->save();
+        Alert::info('Removed!', 'Your Item Remove Successfully!');
         return redirect('/Orders');
     }
 }
