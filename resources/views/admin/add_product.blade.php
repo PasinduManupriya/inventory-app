@@ -10,25 +10,25 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div>
-                        @include('sweetalert::alert');
+                        @include('sweetalert::alert')
                     </div>
                     <form method="post" action="{{route('admin.store_product')}}" enctype="multipart/form-data">
                         @csrf
                         <br>
                         <label>Product Name :</label>
-                        <input type="text" name="product_name" placeholder="Enter Product Name" style="color:black;">
+                        <input type="text" name="product_name" placeholder="Enter Product Name" style="color:black;" required>
                         <br>
                         <br>
                         <label>Product Description :</label>
-                        <input type="text" name="product_description" placeholder="Enter Product Description" style="color:black;">
+                        <input type="text" name="product_description" placeholder="Enter Product Description" style="color:black;" required>
                         <br>
                         <br>
                         <label>Product Quantity :</label>
-                        <input type="number" min="1" name="product_quantity" placeholder="Enter Product Quantity" style="color:black;">
+                        <input type="number" min="1" name="product_quantity" placeholder="Enter Product Quantity" style="color:black;" required>
                         <br>
                         <br>
                         <label>Product Price :</label>
-                        <input type="number" min="0" name="product_price" placeholder="Enter Product Price" style="color:black;">
+                        <input type="number" min="0" name="product_price" placeholder="Enter Product Price" style="color:black;" required>
                         <br>
                         <br>
                         <label>Product Category :</label>

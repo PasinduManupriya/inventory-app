@@ -71,6 +71,8 @@ Route::post('/update_order_quantity/{id}', [AdminController::class, 'update_orde
 
 Route::get('delete_order/{id}', [AdminController::class, 'delete_order'])->name('admin.delete_order');
 
+Route::get('/search_iterm', [AdminController::class, 'search_iterm'])->name('admin_search_iterm');
+
 // admin controller end here 
 
 

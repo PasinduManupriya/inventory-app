@@ -17,11 +17,11 @@
                         @csrf
                         <br>
                         <label>Supplier Name :</label>
-                        <input type="text" name="supplier_name" placeholder="Enter Supplier Name" style="color:black;">
+                        <input type="text" name="supplier_name" placeholder="Enter Supplier Name" style="color:black;" required>
                         <br>
                         <br>
                         <label>Supplier Contact Info :</label>
-                        <input type="text" name="supplier_contact_info" placeholder="Enter Supplier Contact Info" style="color:black;">
+                        <input type="text" name="supplier_contact_info" placeholder="Enter Supplier Contact Info" style="color:black;" required>
                         <br>
                         <br>
                         <button type="submit" style="background-color:green; color:white; padding:8px; border-radius:10px;">Add</button>

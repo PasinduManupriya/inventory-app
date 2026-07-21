@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Order;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -220,5 +221,12 @@ class AdminController extends Controller
         $product->save();
         Alert::info('Removed!', 'Your Item Remove Successfully!');
         return redirect('/Orders');
+    }
+
+    public function search_iterm(Request $request){
+        $search = $request->search;
+        $products = Product::where('product_name', 'LIKE', '%' . $search . '%')->get();
+        $orders = Order::all();
+        return view('admin.order', compact('products','orders'));
     }
 }

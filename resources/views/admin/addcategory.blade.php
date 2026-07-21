@@ -16,7 +16,7 @@
                     </div>
                     <form method="POST" action="{{route('admin.postaddcategory')}}">
                         @csrf
-                        <input type="text" name="add_category" placeholder="Enter Category" required style="color:black;">
+                        <input type="text" name="add_category" placeholder="Enter Category" required style="color:black;" required>
                         <input type="submit" name="submit" value="Add Category" style="background-color:green; border-radius:10px; color:white; padding:8px;">
                     </form>
                 </div>
