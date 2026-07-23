@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // user controller start here
@@ -44,34 +44,47 @@ Route::post('/supplier_save' , [AdminController::class, 'supplier_save']) ->name
 Route::get('/view_supplier' ,[AdminController::class, 'view_supplier'])->middleware(['auth', 'verified'])
     ->name('admin.view_supplier');
 
-Route::get('/delete_supplier/{id}' , [AdminController::class, 'delete_supplier'])->name('admin.delete_supplier');
+Route::get('/delete_supplier/{id}' , [AdminController::class, 'delete_supplier'])->middleware(['auth', 'verified'])
+    ->name('admin.delete_supplier');
 
-Route::get('/update_supplier/{id}', [AdminController::class, 'update_supplier'])->name('admin.update_supplier');
+Route::get('/update_supplier/{id}', [AdminController::class, 'update_supplier'])->middleware(['auth', 'verified'])
+    ->name('admin.update_supplier');
 
-Route::post('/supplier_new_value/{id}', [AdminController::class, 'supplier_new_value'])->name('admin.supplier_new_value');
+Route::post('/supplier_new_value/{id}', [AdminController::class, 'supplier_new_value'])->middleware(['auth', 'verified'])
+    ->name('admin.supplier_new_value');
 
 Route::get('/add_product', [AdminController::class, 'add_product'])->middleware(['auth', 'verified'])
     ->name('admin.add_product');
 
-Route::post('store_product', [AdminController::class, 'store_product'])->name('admin.store_product');
+Route::post('/store_product', [AdminController::class, 'store_product'])->middleware(['auth', 'verified'])
+    ->name('admin.store_product');
 
-Route::get('/view_product', [AdminController::class, 'view_product'])->name('admin.view_product');
+Route::get('/view_product', [AdminController::class, 'view_product']) ->middleware(['auth' , 'verified'])
+    ->name('admin.view_product');
 
-Route::get('/delete_product/{id}', [AdminController::class, 'delete_product'])->name('admin.delete_product');
+Route::get('/delete_product/{id}', [AdminController::class, 'delete_product'])->middleware(['auth', 'verified'])
+    ->name('admin.delete_product');
 
-Route::get('/update_product/{id}', [AdminController::class, 'update_product'])->name('admin.update_product');
+Route::get('/update_product/{id}', [AdminController::class, 'update_product'])->middleware(['auth', 'verified'])
+    ->name('admin.update_product');
 
-Route::post('/update_save_value/{id}', [AdminController::class, 'update_save_value'])->name('admin.update_save_value');
+Route::post('/update_save_value/{id}', [AdminController::class, 'update_save_value'])->middleware(['auth', 'verified'])
+    ->name('admin.update_save_value');
 
-Route::get('/Orders', [AdminController::class, 'Orders']) ->name('admin.Orders');
+Route::get('/Orders', [AdminController::class, 'Orders']) ->middleware(['auth', 'verified'])
+    ->name('admin.Orders');
 
-Route::get('/add_order/{id}', [AdminController::class, 'add_order'])->name('admin.add_order');
+Route::get('/add_order/{id}', [AdminController::class, 'add_order'])->middleware(['auth', 'verified'])
+    ->name('admin.add_order');
 
-Route::post('/update_order_quantity/{id}', [AdminController::class, 'update_order_quantity'])->name('admin.update_order_quantity');
+Route::post('/update_order_quantity/{id}', [AdminController::class, 'update_order_quantity'])->middleware(['auth', 'verified'])
+    ->name('admin.update_order_quantity');
 
-Route::get('delete_order/{id}', [AdminController::class, 'delete_order'])->name('admin.delete_order');
+Route::get('delete_order/{id}', [AdminController::class, 'delete_order'])->middleware(['auth', 'verified'])
+    ->name('admin.delete_order');
 
-Route::get('/search_iterm', [AdminController::class, 'search_iterm'])->name('admin_search_iterm');
+Route::get('/search_iterm', [AdminController::class, 'search_iterm'])->middleware(['auth', 'verified'])
+    ->name('admin_search_iterm');
 
 // admin controller end here 
 
