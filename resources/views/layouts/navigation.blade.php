@@ -11,32 +11,88 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.addcategory')" :active="request()->routeIs('admin.addcategory')">
-                        {{ __('Add Category') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.viewcategory')" :active="request()->routeIs('admin.viewcategory')">
-                        {{ __('View Category') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.add_supplier')" :active="request()->routeIs('admin.add_supplier')">
-                        {{ __('Add Supplier') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.view_supplier')" :active="request()->routeIs('admin.view_supplier')">
-                        {{ __('View Supplier') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.add_product')" :active="request()->routeIs('admin.add_product')">
-                        {{ __('Add Product') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.view_product')" :active="request()->routeIs('admin.view_product')">
-                        {{ __('View Product') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.Orders')" :active="request()->routeIs('admin.Orders')">
-                        {{ __('Orders') }}
-                    </x-nav-link>
-                </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex sm:items-center">
+
+                        <!-- Dashboard Link -->
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-gray-200">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+
+                        <!-- Categories Dropdown -->
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent rounded-md hover:text-gray-200 focus:outline-none {{ request()->routeIs('admin.addcategory') || request()->routeIs('admin.viewcategory') ? 'font-bold border-b-2 border-indigo-500' : '' }}">
+                                    <div>{{ __('Categories') }}</div>
+                                    <div class="ms-1">
+                                        <svg class="w-4 h-4 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.addcategory')" :active="request()->routeIs('admin.addcategory')">
+                                    {{ __('Add Category') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.viewcategory')" :active="request()->routeIs('admin.viewcategory')">
+                                    {{ __('View Category') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
+                        <!-- Suppliers Dropdown -->
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent rounded-md hover:text-gray-200 focus:outline-none {{ request()->routeIs('admin.add_supplier') || request()->routeIs('admin.view_supplier') ? 'font-bold border-b-2 border-indigo-500' : '' }}">
+                                    <div>{{ __('Suppliers') }}</div>
+                                    <div class="ms-1">
+                                        <svg class="w-4 h-4 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.add_supplier')" :active="request()->routeIs('admin.add_supplier')">
+                                    {{ __('Add Supplier') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.view_supplier')" :active="request()->routeIs('admin.view_supplier')">
+                                    {{ __('View Supplier') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
+                        <!-- Products Dropdown -->
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out bg-transparent rounded-md hover:text-gray-200 focus:outline-none {{ request()->routeIs('admin.add_product') || request()->routeIs('admin.view_product') ? 'font-bold border-b-2 border-indigo-500' : '' }}">
+                                    <div>{{ __('Products') }}</div>
+                                    <div class="ms-1">
+                                        <svg class="w-4 h-4 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.add_product')" :active="request()->routeIs('admin.add_product')">
+                                    {{ __('Add Product') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.view_product')" :active="request()->routeIs('admin.view_product')">
+                                    {{ __('View Product') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
+                        <!-- Orders Link -->
+                        <x-nav-link :href="route('admin.Orders')" :active="request()->routeIs('admin.Orders')" class="text-white hover:text-gray-200">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+
+                    </div>
             </div>
 
             <!-- Settings Dropdown -->

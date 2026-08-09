@@ -229,4 +229,9 @@ class AdminController extends Controller
         $orders = Order::all();
         return view('admin.order', compact('products','orders'));
     }
+
+    public function clear_order(){
+        Order::query()->delete();
+        return redirect()->back();
+    }
 }

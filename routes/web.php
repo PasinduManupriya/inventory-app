@@ -86,6 +86,9 @@ Route::get('delete_order/{id}', [AdminController::class, 'delete_order'])->middl
 Route::get('/search_iterm', [AdminController::class, 'search_iterm'])->middleware(['auth', 'verified'])
     ->name('admin_search_iterm');
 
+Route::get('/order_clear', [AdminController::class, 'clear_order'])->middleware(['auth', 'verified'])
+    ->name('admin.clear_order');
+
 // admin controller end here 
 
 

@@ -61,6 +61,7 @@
                         <div>
                             <br>
                             <button onclick="downloadPDF()" class="btn btn-primary">Download PDF</button>
+                            <a href="{{route('admin.clear_order')}}" class="block text-right">Clear Order</a>
                             <script>
                                 function downloadPDF() {
                                     const element = document.getElementById('pdf-content');
