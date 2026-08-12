@@ -103,6 +103,7 @@ class AdminController extends Controller
         $product->product_price = $request->product_price;
         $product->product_category = $request->product_category;
         $product->product_supplier = $request->product_supplier;
+        $product->received_date = $request->product_received_date;
 
         if($request->product_image){
             $img = $request->product_image;
@@ -124,8 +125,9 @@ class AdminController extends Controller
     public function delete_product($id){
         $product = Product::findOrFail($id);
         $product->delete();
+        $products = Product::all();
         Alert::info('Deleted!', 'Product Deleted!');
-        return redirect()->back();
+        return view('admin.view_product', compact('products'));
     }
 
     public function update_product($id){
@@ -143,6 +145,7 @@ class AdminController extends Controller
         $product->product_price = $request->product_price;
         $product->product_category = $request->product_category;
         $product->product_supplier = $request->product_supplier;
+        $product->received_date = $request->product_received_date;
 
         if($request->hasFile('product_image')){
             $img = $request->product_image;
@@ -154,6 +157,11 @@ class AdminController extends Controller
         Alert::Success('Updated!', 'Product Updated Successfully!');
         return redirect('view_product');
 
+    }
+
+    public function view_product_details($id){
+        $product_details = Product::findOrFail($id);
+        return view('admin.view_product_details', compact('product_details'));
     }
 
     public function Orders(){

@@ -71,6 +71,9 @@ Route::get('/update_product/{id}', [AdminController::class, 'update_product'])->
 Route::post('/update_save_value/{id}', [AdminController::class, 'update_save_value'])->middleware(['auth', 'verified'])
     ->name('admin.update_save_value');
 
+Route::get('/view_product_details/{id}', [AdminController::class, 'view_product_details'])->middleware(['auth', 'verified'])
+    ->name('admin.view_product_details');
+
 Route::get('/Orders', [AdminController::class, 'Orders']) ->middleware(['auth', 'verified'])
     ->name('admin.Orders');
 

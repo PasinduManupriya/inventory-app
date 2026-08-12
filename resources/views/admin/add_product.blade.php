@@ -50,6 +50,12 @@
                         </select>
                         <br>
                         <br>
+
+                        <label>Product Received Date :</label>
+                        <input type="date" name="product_received_date" style="color:black;" required>
+                        <br>
+                        <br>
+
                         <label>Product Image :</label>
                         <input type="file" name="product_image">
                         <br>

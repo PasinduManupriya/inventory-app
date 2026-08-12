@@ -19,28 +19,18 @@
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr class="text-white dark:text-white">
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">product Description</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Quantity</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product price</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Category</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Supplier</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Image</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Delete</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Product Update</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                 @foreach($products as $product)
                                 <tr class="text-white dark:text-white">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_name}}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_description}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_quantity}}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_price}}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_category}}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{$product->product_supplier}}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><img width="50%" height="50%" src="{{asset('db_img/' . $product->product_image)}}"></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.delete_product', $product->id)}}" style="background-color:red; color:white; padding:5px; border-radius: 8px; border-radius: 10px;">Delete</a></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.update_product', $product->id)}}" style="background-color:green; color:white; padding:5px; border-radius: 8px; border-radius: 10px;">Update</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{route('admin.view_product_details', $product->id)}}"><img style="width:25%; height=25%; display: block; margin: 0 auto;" src="{{asset('db_img/' . $product->product_image)}}"></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

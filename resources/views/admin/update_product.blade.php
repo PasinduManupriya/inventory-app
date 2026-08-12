@@ -51,6 +51,10 @@
                         </select>
                         <br>
                         <br>
+                        <label>Product Received Name :</label>
+                        <input type="date" name="product_received_date" value="{{$products->received_date}}" style="color:black;">
+                        <br>
+                        <br>
                         <label>Current Product Image :</label>
                         <img style="width:20%; height:20%" src="{{asset('db_img/' . $products->product_image)}}">
                         <br>
