@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/', [AdminController::class, 'home'])->name('home');
 
 // user controller start here
 
@@ -15,6 +17,8 @@ Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['aut
     ->name('dashboard');
 
 // user controller end here 
+
+Route::get('/user_search_iterm', [UserController::class, 'user_search_iterm']) ->name('user_search_iterm');
 
 
 // admin controller start here

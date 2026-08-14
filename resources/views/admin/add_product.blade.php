@@ -43,7 +43,7 @@
                         <br>
                         <label>Product Supplier :</label>
                         <select name="product_supplier" style="color:black;">
-                            <option value="" disabled selected>-- Select Category --</option>
+                            <option value="" disabled selected>-- Select Supplier --</option>
                             @foreach($suppliers as $supplier)
                                 <option>{{$supplier->supplier_name}}</option>
                             @endforeach

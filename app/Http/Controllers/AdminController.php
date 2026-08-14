@@ -12,6 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
+    public function home(){
+        $products = Product::simplePaginate(18);
+        return view('home.home', compact('products'));
+    }
+
     public function addCategory(){
         return view('admin.addcategory');
     }

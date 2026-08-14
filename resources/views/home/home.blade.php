@@ -19,10 +19,11 @@
             </style>
         @endif
 </head>
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-    <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+<body class="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen flex flex-col" 
+      style="background-image: url('{{ asset('images/bg.png') }}');">
+    <header class="w-full text-sm mt-0 pt-0 mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
+                <nav class="w-full mb-4 ">
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
@@ -31,53 +32,140 @@
                             Dashboard
                         </a>
                     @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
+                        <div class="flex justify-between items-center w-full px-6 py-2 bg-transparent">
+                            <div class="flex items-center gap-2">
                             <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
+                                href="{{url('/')}}"
+                                class="text-left inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            >
+                                Home
                             </a>
-                        @endif
+                        
+                            <a
+                                href=""
+                                class="text-left inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            >
+                                About Us
+                            </a>
+
+                            <a
+                                href=""
+                                class="text-left inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            >
+                                Cart
+                            </a>
+
+                            <a
+                                href=""
+                                class="text-left inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            >
+                                Order
+                            </a>
+                            </div>
+                        <div class="flex items-center gap-2">
+                            <a
+                                href="{{ route('login') }}"
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            >
+                                Log in
+                            </a>
+
+                            @if (Route::has('register'))
+                                <a
+                                    href="{{ route('register') }}"
+                                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                                    Register
+                                </a>
+                            @endif
+                        </div>
+                    </div>
                     @endauth
                 </nav>
             @endif
         </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
-                <div class="flex-1 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC]  rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <div >
-                        <h1 class="text-gray-400" style="font-size:55px; padding-top:0px;"><b>Inventory</b></h1>
-                        <h1 class="text-gray-400" style="font-size:55px; padding-top: 5px;"><b>Management</b></h1>
-                        <h1 class="text-gray-400" style="font-size:55px; padding-top: 5px;"><b>System</b></h1>
-                        <h1 class="text-gray-400" style="padding-top: 15px;"><i>
-                            Track stock levels, manage products, and keep your business running smoothly.
-                        </i></h1>
+        <div class="w-full max-w-6xl mx-auto mb-6">
+            <form class="relative flex items-center w-full" action="{{route('user_search_iterm')}}" methot="GET">
+                <input type="search" name="search" placeholder="Search Something" autocomplete="off" class="w-full px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                <button type="submit" class="absolute right-2 px-4 py-1.5 bg-blue-600/80 hover:bg-blue-600 text-white text-sm font-medium rounded-lg backdrop-blur-md transition-all duration-200 border border-blue-400/30 active:scale-95">Search</button>
+            </form>
+        </div>
+        <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
+            <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
+                <div class="grid grid-cols-6 gap-x-4 gap-y-4">
+                    @foreach ($products as $product)
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-[180px] max-w-[700px] border-2 border-gray-500 rounded-xl p-6 mx-auto bg-[#0f172a]/60 backdrop-blur-md border border-white/10">
+                            <img class="w-36 h-36 object-cover rounded-lg" src="{{asset('db_img/' . $product->product_image)}}">
+                            <h1 style="color:white;">{{$product->product_name}}</h1>
+                            <h1 style="color:white;">${{$product->product_price}}</h1>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="mt-6">
+                        {{$products->links()}}
                     </div>
                 </div>
-                <div class="flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC]  rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <div >
-                        <img src="{{ asset('images/inventory_logo.png') }}" alt="Inventory Logo" style="width:800px">
-                    </div>
-                </div>
-                
-                <!-- <div class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden">
-                    pasindu
-                    
-
-                    
-                </div> -->
-            </main>
+            </div>
         </div>
 
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
+           
+        <footer class="bg-[#1a233a] text-white py-8 px-6 border-t border-white/20 font-sans mt-20">
+          <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+
+            <!-- Follow Us Section -->
+            <div class="flex flex-col items-center md:items-start space-y-2">
+              <h3 class="text-lg font-medium">Follow Us</h3>
+              <p class="text-sm text-gray-300">@Inventory</p>
+              <div class="flex space-x-3 pt-1">
+                <a href="#" class=" w-9 h-9 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#1a233a] transition-all">
+                  <i class="fab fa-facebook-f text-sm"></i>
+                </a>
+                <a href="#" class="w-9 h-9 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#1a233a] transition-all">
+                  <i class="fab fa-instagram text-sm"></i>
+                </a>
+                <a href="#" class="w-9 h-9 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#1a233a] transition-all">
+                  <i class="fab fa-twitter text-sm"></i>
+                </a>
+                <a href="#" class="w-9 h-9 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#1a233a] transition-all">
+                  <i class="fab fa-linkedin-in text-sm"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="flex flex-col items-center md:items-start space-y-2">
+              <h3 class="text-lg font-medium">Newsletter Sign-Up</h3>
+              <form class="flex space-x-2">
+                <input 
+                  type="email" 
+                  placeholder="Your Email" 
+                  class="px-3 py-2 rounded bg-white text-gray-800 text-sm focus:outline-none"
+                  required
+                >
+                <button 
+                  type="submit" 
+                  class="px-4 py-2 bg-gray-200 text-gray-800 text-sm font-semibold rounded hover:bg-white transition-all"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            <!-- Links Section -->
+            <div class="flex space-x-6 text-base font-normal">
+              <a href="#" class="hover:underline">Help Center</a>
+              <a href="#" class="hover:underline">Contact Us</a>
+            </div>
+
+          </div>
+        </footer>
+
+        <!-- Font Awesome (Social Icons සඳහා) -->
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        </footer>
     </body>
 </html>

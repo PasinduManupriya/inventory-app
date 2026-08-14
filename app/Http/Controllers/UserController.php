@@ -24,4 +24,10 @@ class UserController extends Controller
             return redirect('/');
         }
     }
+
+    public function user_search_iterm(Request $request){
+        $search = $request->search;
+        $products = Product::where('product_name', 'LIKE', '%' . $search . '%') ->paginate(18) ->withQueryString();
+        return view('home.home', compact('products'));
+    }
 }
