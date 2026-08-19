@@ -34,40 +34,40 @@
                     @else
                         <div class="flex justify-between items-center w-full px-6 py-2 bg-transparent">
                             <div class="flex items-center gap-2">
-                                <a href="{{url('/')}}">
-                                    <img src="{{ asset('images/inventory_logo.png') }}" class="block h-7 w-auto" alt="Inventory Logo">
-                                </a>
-                                <a
-                                    href="{{url('/')}}"
-                                    class="ml-3 text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('/','user_product_details') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            <a href="{{url('/')}}">
+                                <img src="{{ asset('images/inventory_logo.png') }}" class="block h-7 w-auto" alt="Inventory Logo">
+                            </a>
+                            <a
+                                href="{{url('/')}}"
+                                class="ml-3 text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('/','user_product_details') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
                                 >
-                                    Home
-                                </a>
+                                Home
+                            </a>
+                        
+                            <a
+                                href="{{url('about_us')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                About Us
+                            </a>
 
-                                <a
-                                    href="{{url('about_us')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    About Us
-                                </a>
+                            <a
+                                href="{{url('cart')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                Cart
+                            </a>
 
-                                <a
-                                    href="{{url('cart')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Cart
-                                </a>
-
-                                <a
-                                    href="{{url('order')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Order
-                                </a>
+                            <a
+                                href="{{url('order')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                Order
+                            </a>
                             </div>
                         <div class="flex items-center gap-2">
                             <a
@@ -91,33 +91,18 @@
             @endif
         </header>
         <div class="w-full max-w-6xl mx-auto mb-6">
-            <form class="relative flex items-center w-full" action="{{route('user_search_iterm')}}" methot="GET">
-                <input type="search" name="search" placeholder="Search Something" autocomplete="off" class="w-full px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                <button type="submit" class="absolute right-2 px-4 py-1.5 bg-blue-600/80 hover:bg-blue-600 text-white text-sm font-medium rounded-lg backdrop-blur-md transition-all duration-200 border border-blue-400/30 active:scale-95 transition-transform duration-300 hover:scale-110">Search</button>
-            </form>
+            
         </div>
         <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
                 <div class="grid grid-cols-6 gap-x-4 gap-y-4">
-                    @foreach ($products as $product)
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-[180px] max-w-[700px] border-2 border-gray-500 rounded-xl p-6 mx-auto bg-[#0f172a]/60 backdrop-blur-md border border-white/10">
-                            <a href="{{route('user_product_details', $product->id)}}"><img class="w-36 h-36 object-cover rounded-lg transition-transform duration-300 hover:scale-110" src="{{asset('db_img/' . $product->product_image)}}"></a>
-                            <h1 style="color:white;">{{$product->product_name}}</h1>
-                            <h1 style="color:white;">${{$product->product_price}}</h1>
-                        </div>
-                    </div>
-                    @endforeach
-                    <div class="mt-6">
-                        {{$products->links()}}
-                    </div>
+                    <h1>Cart</h1>
+                   
                 </div>
             </div>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        
            
         <footer class="bg-[#1a233a] text-white py-8 px-6 border-t border-white/20 font-sans mt-20">
           <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">

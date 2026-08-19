@@ -16,6 +16,15 @@ Route::get('/', [AdminController::class, 'home'])->name('home');
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::get('/about_us', [UserController::class, 'about_us']) -> name('about_us');
+
+Route::get('/cart', [UserController::class, 'cart']) ->middleware(['auth', 'verified'])
+    -> name('cart');
+
+Route::get('/order', [UserController::class, 'order']) -> name('order');
+
+Route::get('/user_product_details/{id}', [UserController::class, 'user_product_details']) -> name('user_product_details');
+
 // user controller end here 
 
 Route::get('/user_search_iterm', [UserController::class, 'user_search_iterm']) ->name('user_search_iterm');

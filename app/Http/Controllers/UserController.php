@@ -30,4 +30,21 @@ class UserController extends Controller
         $products = Product::where('product_name', 'LIKE', '%' . $search . '%') ->paginate(18) ->withQueryString();
         return view('home.home', compact('products'));
     }
+
+    public function about_us(){
+        return view('home.about_us');
+    }
+
+    public function cart(){
+        return view('home.cart');
+    }
+
+    public function order(){
+        return view('home.order');
+    }
+
+    public function user_product_details($id){
+        $product = Product::findOrFail($id);
+        return view('home.user_product_details', compact('product'));
+    }
 }

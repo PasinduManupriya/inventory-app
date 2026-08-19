@@ -34,40 +34,40 @@
                     @else
                         <div class="flex justify-between items-center w-full px-6 py-2 bg-transparent">
                             <div class="flex items-center gap-2">
-                                <a href="{{url('/')}}">
+                            <a href="{{url('/')}}">
                                     <img src="{{ asset('images/inventory_logo.png') }}" class="block h-7 w-auto" alt="Inventory Logo">
-                                </a>
-                                <a
+                            </a>
+                            <a
                                     href="{{url('/')}}"
                                     class="ml-3 text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
                                         {{ request()->is('/','user_product_details') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
                                 >
                                     Home
-                                </a>
+                            </a>
+                        
+                            <a
+                                href="{{url('about_us')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                About Us
+                            </a>
 
-                                <a
-                                    href="{{url('about_us')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    About Us
-                                </a>
+                            <a
+                                href="{{url('cart')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                Cart
+                            </a>
 
-                                <a
-                                    href="{{url('cart')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Cart
-                                </a>
-
-                                <a
-                                    href="{{url('order')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Order
-                                </a>
+                            <a
+                                href="{{url('order')}}"
+                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
+                                    {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
+                            >
+                                Order
+                            </a>
                             </div>
                         <div class="flex items-center gap-2">
                             <a
@@ -91,33 +91,71 @@
             @endif
         </header>
         <div class="w-full max-w-6xl mx-auto mb-6">
-            <form class="relative flex items-center w-full" action="{{route('user_search_iterm')}}" methot="GET">
-                <input type="search" name="search" placeholder="Search Something" autocomplete="off" class="w-full px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                <button type="submit" class="absolute right-2 px-4 py-1.5 bg-blue-600/80 hover:bg-blue-600 text-white text-sm font-medium rounded-lg backdrop-blur-md transition-all duration-200 border border-blue-400/30 active:scale-95 transition-transform duration-300 hover:scale-110">Search</button>
-            </form>
+            
         </div>
         <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
-                <div class="grid grid-cols-6 gap-x-4 gap-y-4">
-                    @foreach ($products as $product)
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-[180px] max-w-[700px] border-2 border-gray-500 rounded-xl p-6 mx-auto bg-[#0f172a]/60 backdrop-blur-md border border-white/10">
-                            <a href="{{route('user_product_details', $product->id)}}"><img class="w-36 h-36 object-cover rounded-lg transition-transform duration-300 hover:scale-110" src="{{asset('db_img/' . $product->product_image)}}"></a>
-                            <h1 style="color:white;">{{$product->product_name}}</h1>
-                            <h1 style="color:white;">${{$product->product_price}}</h1>
-                        </div>
+                
+                    
+
+        <!-- About Us -->
+            <!-- Main Container -->
+            <main class="max-w-6xl mx-auto px-6 py-12">
+
+                <!-- About Header -->
+                <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-10 text-center mb-8 shadow-2xl">
+                    <h1 class="text-4xl font-extrabold tracking-wide mb-3">About WE Store</h1>
+                    <p class="text-blue-200 text-lg">Your ultimate destination for tech, fashion, toys, and everyday essentials.</p>
+                </div>
+
+                <!-- Details Grid -->
+                <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-8 mb-8 shadow-2xl grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-3">Who We Are</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            At <strong class="text-white">WE</strong>, we believe in bringing quality products directly to your doorstep. From high-end electronics and trendy apparel to fun toys and household items, we carefully curate our store to meet all your daily needs at affordable prices.
+                        </p>
                     </div>
-                    @endforeach
-                    <div class="mt-6">
-                        {{$products->links()}}
+                    <div>
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-3">Our Mission</h2>
+                        <p class="text-gray-300 leading-relaxed">
+                            Our goal is to deliver a seamless shopping experience backed by premium quality, exceptional customer support, and fast delivery. We continuously expand our categories to make shopping easier and more accessible for everyone.
+                        </p>
                     </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center shadow-2xl hover:scale-105 transition duration-300">
+                        <i class="fa-solid fa-truck-fast text-4xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Fast Shipping</h3>
+                        <p class="text-blue-200 text-sm">Quick and reliable delivery straight to your location.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center shadow-2xl hover:scale-105 transition duration-300">
+                        <i class="fa-solid fa-shield-halved text-4xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Secure Payments</h3>
+                        <p class="text-blue-200 text-sm">100% safe checkout process for peace of mind.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center shadow-2xl hover:scale-105 transition duration-300">
+                        <i class="fa-solid fa-headset text-4xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+                        <p class="text-blue-200 text-sm">Dedicated customer service team ready to assist you anytime.</p>
+                    </div>
+                </div>
+
+            </main>
+
+
+
+                <!-- About Us -->
+                   
                 </div>
             </div>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        
            
         <footer class="bg-[#1a233a] text-white py-8 px-6 border-t border-white/20 font-sans mt-20">
           <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
