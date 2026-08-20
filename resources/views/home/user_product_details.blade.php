@@ -21,75 +21,11 @@
 </head>
 <body class="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen flex flex-col" 
       style="background-image: url('{{ asset('images/bg.png') }}');">
-    <header class="w-full text-sm mt-0 pt-0 mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="w-full mb-4 ">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <div class="flex justify-between items-center w-full px-6 py-2 bg-transparent">
-                            <div class="flex items-center gap-2">
-                            <a href="{{url('/')}}">
-                                <img src="{{ asset('images/inventory_logo.png') }}" class="block h-7 w-auto" alt="Inventory Logo">
-                            </a>
-                            <a
-                                href="{{url('/')}}"
-                                class="ml-3 text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                    {{ request()->is('/','user_product_details') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                            >
-                                Home
-                            </a>
-                        
-                            <a
-                                href="{{url('about_us')}}"
-                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                    {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                            >
-                                About Us
-                            </a>
+    
+        <!-- nav section -->
+            @include('home.Header')   
+        <!-- nav section -->
 
-                            <a
-                                href="{{url('cart')}}"
-                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                    {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                            >
-                                Cart
-                            </a>
-
-                            <a
-                                href="{{url('order')}}"
-                                class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                    {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                            >
-                                Order
-                            </a>
-                            </div>
-                        <div class="flex items-center gap-2">
-                            <a
-                                href="{{ route('login') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                            >
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a
-                                    href="{{ route('register') }}"
-                                    class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] hover:opacity-80 rounded-sm text-sm leading-normal">
-                                    Register
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                    @endauth
-                </nav>
-            @endif
-        </header>
         <div class="w-full max-w-6xl mx-auto mb-6">
             
         </div>
@@ -106,8 +42,12 @@
                     <h2 class="text-center dark:text-white"><b>Product Available Quantity :</b> {{$product->product_quantity}}</h2>
                     <h2 class="text-center dark:text-white"><b>Product Price : </b> ${{$product->product_price}}</h2>
                     <div class="text-center p-12 font-bold space-x-4">
-                        <a href="" class="bg-[#30FF63] px-8 py-3 rounded-full text-black inline-block text-lg shadow-md hover:scale-105 transition-transform">Add Cart</a>
-                        <a href="" class="bg-[#FF8D30] px-8 py-3 rounded-full text-black inline-block text-lg shadow-md hover:scale-105 transition-transform">Buy Now</a>
+                        <form action="" method="">
+                            Quantity : <input type="number" name="quantity" value="1" min="1" class="w-20 px-3 py-2 bg-slate-800/80 text-white border border-slate-600 rounded-lg text-center font-semibold focus:outline-none focus:ring-2 focus:ring-[#30FF63] focus:border-transparent transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0" requared>
+                            <br>
+                            <br>
+                            <button class="bg-[#30FF63] px-8 py-3 rounded-full text-black inline-block text-lg shadow-md hover:scale-105 transition-transform">Add To Cart</button>
+                        </form>
                     </div>
                 
             </div>

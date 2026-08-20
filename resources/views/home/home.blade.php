@@ -21,75 +21,11 @@
 </head>
 <body class="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen flex flex-col" 
       style="background-image: url('{{ asset('images/bg.png') }}');">
-    <header class="w-full text-sm mt-0 pt-0 mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="w-full mb-4 ">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <div class="flex justify-between items-center w-full px-6 py-2 bg-transparent">
-                            <div class="flex items-center gap-2">
-                                <a href="{{url('/')}}">
-                                    <img src="{{ asset('images/inventory_logo.png') }}" class="block h-7 w-auto" alt="Inventory Logo">
-                                </a>
-                                <a
-                                    href="{{url('/')}}"
-                                    class="ml-3 text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('/','user_product_details') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Home
-                                </a>
-
-                                <a
-                                    href="{{url('about_us')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('about_us') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    About Us
-                                </a>
-
-                                <a
-                                    href="{{url('cart')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('cart') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Cart
-                                </a>
-
-                                <a
-                                    href="{{url('order')}}"
-                                    class="text-left inline-block px-5 py-1.5 transition-all duration-200 dark:text-[#EDEDEC] text-[#1b1b18] text-sm leading-normal
-                                        {{ request()->is('order') ? 'border-b-2 border-[#FFFFFF] rounded-b-md font-semibold' : 'border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm' }}"
-                                >
-                                    Order
-                                </a>
-                            </div>
-                        <div class="flex items-center gap-2">
-                            <a
-                                href="{{ route('login') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                            >
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a
-                                    href="{{ route('register') }}"
-                                    class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] hover:opacity-80 rounded-sm text-sm leading-normal">
-                                    Register
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                    @endauth
-                </nav>
-            @endif
-        </header>
+        
+      <!-- nav section -->
+        @include('home.Header')   
+      <!-- nav section -->
+        
         <div class="w-full max-w-6xl mx-auto mb-6">
             <form class="relative flex items-center w-full" action="{{route('user_search_iterm')}}" methot="GET">
                 <input type="search" name="search" placeholder="Search Something" autocomplete="off" class="w-full px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
@@ -98,17 +34,17 @@
         </div>
         <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
-                <div class="grid grid-cols-6 gap-x-4 gap-y-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                     @foreach ($products as $product)
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-[180px] max-w-[700px] border-2 border-gray-500 rounded-xl p-6 mx-auto bg-[#0f172a]/60 backdrop-blur-md border border-white/10">
+                        <div class="w-full border border-gray-500/50 rounded-xl p-3 sm:p-4 bg-[#0f172a]/60 backdrop-blur-md border-white/10 flex flex-col items-center">
                             <a href="{{route('user_product_details', $product->id)}}"><img class="w-36 h-36 object-cover rounded-lg transition-transform duration-300 hover:scale-110" src="{{asset('db_img/' . $product->product_image)}}"></a>
                             <h1 style="color:white;">{{$product->product_name}}</h1>
                             <h1 style="color:white;">${{$product->product_price}}</h1>
                         </div>
                     </div>
                     @endforeach
-                    <div class="mt-6">
+                    <div class="mt-6 flex justify-center w-full">
                         {{$products->links()}}
                     </div>
                 </div>
