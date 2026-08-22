@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\UserOrder;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -36,7 +37,9 @@ class UserController extends Controller
     }
 
     public function cart(){
-        return view('home.cart');
+        $user_id = Auth::id();
+        $cart_items = UserOrder::where('user_id', $user_id) -> with('product')->get();
+        return view('home.cart', compact('cart_items'));
     }
 
     public function order(){
@@ -46,5 +49,15 @@ class UserController extends Controller
     public function user_product_details($id){
         $product = Product::findOrFail($id);
         return view('home.user_product_details', compact('product'));
+    }
+
+    public function add_user_order($id, Request $request){
+        $user_order = new UserOrder();
+        $user_order->user_id = Auth::id();
+        $user_order->product_id = $id;
+        $user_order->user_product_quantity = $request->quantity;
+        $user_order->save();
+        return redirect()->back();
+        // return view('home.user_product_details');
     }
 }

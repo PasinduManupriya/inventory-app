@@ -42,7 +42,8 @@
                     <h2 class="text-center dark:text-white"><b>Product Available Quantity :</b> {{$product->product_quantity}}</h2>
                     <h2 class="text-center dark:text-white"><b>Product Price : </b> ${{$product->product_price}}</h2>
                     <div class="text-center p-12 font-bold space-x-4">
-                        <form action="" method="">
+                        <form action="{{route('add_user_order' , $product->id)}}" method="POST">
+                          @csrf
                             Quantity : <input type="number" name="quantity" value="1" min="1" class="w-20 px-3 py-2 bg-slate-800/80 text-white border border-slate-600 rounded-lg text-center font-semibold focus:outline-none focus:ring-2 focus:ring-[#30FF63] focus:border-transparent transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0" requared>
                             <br>
                             <br>

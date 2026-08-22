@@ -30,12 +30,45 @@
             
         </div>
         <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
-                <div class="grid grid-cols-6 gap-x-4 gap-y-4">
-                    <h1>Cart</h1>
-                   
-                </div>
-            </div>
+            
+
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                      <div class="overflow-x-auto rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl p-4">
+                        <table class="w-full text-left text-white border-collapse">
+                          <thead>
+                            <tr class="border-b border-white/20 text-sm font-semibold text-purple-200">
+                              <th class="py-3 px-4">Product Name</th>
+                              <th class="py-3 px-4">Description</th>
+                              <th class="py-3 px-4 text-center">Quantity</th>
+                              <th class="py-3 px-4">Price</th>
+                              <th class="py-3 px-4 text-center">Image</th>
+                              <th class="py-3 px-4 text-center">Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-white/10 text-sm">
+                            @foreach ($cart_items as $cart_item)
+                              <tr class="hover:bg-white/5 transition duration-200">
+                                <td class="py-4 px-4 font-medium">{{ $cart_item->product->product_name }}</td>
+                                <td class="py-4 px-4 text-gray-300 max-w-xs truncate" title="{{ $cart_item->product->product_description }}">
+                                  {{ $cart_item->product->product_description }}
+                                </td>
+                                <td class="py-4 px-4 text-center font-bold">{{ $cart_item->user_product_quantity }}</td>
+                                <td class="py-4 px-4 font-semibold text-emerald-400">${{ number_format($cart_item->product->product_price, 2) }}</td>
+                                <td class="py-4 px-4 text-center">
+                                  <img src="{{asset('db_img/' . $cart_item->product->product_image )}}" alt="Product Image" class="w-12 h-12 object-cover rounded-lg mx-auto border border-white/20 shadow-sm">
+                                </td>
+                                <td class="py-4 px-4 text-center">
+                                  <a href="{{ url('delete_cart/'.$cart_item->id) }}" class="inline-block bg-rose-600/80 hover:bg-rose-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition duration-150 shadow-md">
+                                    Delete
+                                  </a>
+                                </td>
+                              </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+              
         </div>
 
         

@@ -25,6 +25,8 @@ Route::get('/order', [UserController::class, 'order']) -> name('order');
 
 Route::get('/user_product_details/{id}', [UserController::class, 'user_product_details']) -> name('user_product_details');
 
+Route::post('/add_user_order/{id}', [UserController::class, 'add_user_order']) ->name('add_user_order');
+
 // user controller end here 
 
 Route::get('/user_search_iterm', [UserController::class, 'user_search_iterm']) ->name('user_search_iterm');
