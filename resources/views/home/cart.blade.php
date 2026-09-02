@@ -53,7 +53,7 @@
                                   {{ $cart_item->product->product_description }}
                                 </td>
                                 <td class="py-4 px-4 text-center font-bold">{{ $cart_item->user_product_quantity }}</td>
-                                <td class="py-4 px-4 font-semibold text-emerald-400">${{ number_format($cart_item->product->product_price, 2) }}</td>
+                                <td class="py-4 px-4 font-semibold text-emerald-400">${{ number_format($cart_item->product->product_price * $cart_item->user_product_quantity, 2) }}</td>
                                 <td class="py-4 px-4 text-center">
                                   <img src="{{asset('db_img/' . $cart_item->product->product_image )}}" alt="Product Image" class="w-12 h-12 object-cover rounded-lg mx-auto border border-white/20 shadow-sm">
                                 </td>
@@ -66,9 +66,14 @@
                             @endforeach
                           </tbody>
                         </table>
+                        <div class="border-b border-black/20 text-sm font-semibold text-purple-200 pl-4">
+                            <h1>Total Price : $ {{ number_format($cart_items->sum(function($item) { return $item->product->product_price * $item->user_product_quantity; }), 2) }}</h1>
+                        </div>
                       </div>
                     </div>
-              
+        </div>
+        <div class="mt-6 text-center">
+          <a href="{{url('confirm_order')}}" class="inline-flex items-center justify-center px-6 py-2 bg-orange-500/20 hover:bg-orange-500/40 border-2 border-orange-500/80 text-orange-400 hover:text-orange-300 font-semibold text-sm rounded-full backdrop-blur-md shadow-lg shadow-orange-500/10 hover:shadow-orange-500/30 transition duration-300 transform hover:scale-105">Order Now</a>
         </div>
 
         

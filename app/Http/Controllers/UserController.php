@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Cart;
 use App\Models\UserOrder;
+use App\Models\User_order;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -43,7 +45,9 @@ class UserController extends Controller
     }
 
     public function order(){
-        return view('home.order');
+        $user_id = Auth::id();
+        $items = User_order::with(['user', 'product'])-> where('user_id', Auth::id()) -> get();
+        return view('home.order', compact('items'));
     }
 
     public function user_product_details($id){
@@ -60,4 +64,19 @@ class UserController extends Controller
         return redirect()->back();
         // return view('home.user_product_details');
     }
+
+    public function confirm_order(){
+        $user_id = Auth::id();
+        $cart_item = UserOrder::where('user_id',$user_id)->get();
+        foreach($cart_item as $cart_item){
+            $c_item = new User_order;
+            $c_item -> user_id = $cart_item -> user_id; 
+            $c_item -> product_id = $cart_item -> product_id;
+            $c_item -> product_quantity = $cart_item -> user_product_quantity;
+            $c_item->save();
+            $cart_item->delete();
+        }
+        return redirect()->back();
+    }
 }
+	

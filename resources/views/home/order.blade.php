@@ -21,19 +21,47 @@
 </head>
 <body class="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen flex flex-col" 
       style="background-image: url('{{ asset('images/bg.png') }}');">
+    
         <!-- nav section -->
             @include('home.Header')   
         <!-- nav section -->
+
         <div class="w-full max-w-6xl mx-auto mb-6">
             
         </div>
         <div class="w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <div class="w-[auto] h-[auto] border-2 border-gray-600 rounded-xl shadow-lg p-6 max-w-6xl mx-auto bg-transparent">
-                <div class="grid grid-cols-6 gap-x-4 gap-y-4">
-                    <h1>Order</h1>
-                   
-                </div>
-            </div>
+            
+
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                      <div class="overflow-x-auto rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl p-4">
+                        <table class="w-full text-left text-white border-collapse">
+                          <thead>
+                            <tr class="border-b border-white/20 text-sm font-semibold text-purple-200">
+                              <th class="py-3 px-4">Product Name</th>
+                              <th class="py-3 px-4">Description</th>
+                              <th class="py-3 px-4 text-center">Status</th>
+                              <th class="py-3 px-4">Price</th>
+                              <th class="py-3 px-4 text-center">Image</th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-white/10 text-sm">
+                            @foreach ($items as $items)
+                              <tr class="hover:bg-white/5 transition duration-200">
+                                <td class="py-4 px-4 font-medium">{{ $items->product->product_name }}</td>
+                                <td class="py-4 px-4 text-gray-300 max-w-xs truncate" title="{{ $items->product->product_description }}">
+                                  {{ $items->product->product_description }}
+                                </td>
+                                <td class="py-4 px-4 text-center font-bold">{{ $items->order_process }}</td>
+                                <td class="py-4 px-4 font-semibold text-emerald-400">${{ number_format($items->product->product_price * $items->product_quantity, 2) }}</td>
+                                <td class="py-4 px-4 text-center">
+                                  <img src="{{asset('db_img/' . $items->product->product_image )}}" alt="Product Image" class="w-12 h-12 object-cover rounded-lg mx-auto border border-white/20 shadow-sm">
+                                </td>
+                              </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
         </div>
 
         

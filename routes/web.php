@@ -21,11 +21,15 @@ Route::get('/about_us', [UserController::class, 'about_us']) -> name('about_us')
 Route::get('/cart', [UserController::class, 'cart']) ->middleware(['auth', 'verified'])
     -> name('cart');
 
-Route::get('/order', [UserController::class, 'order']) -> name('order');
+Route::get('/order', [UserController::class, 'order']) ->middleware(['auth', 'verified'])
+    -> name('order');
 
 Route::get('/user_product_details/{id}', [UserController::class, 'user_product_details']) -> name('user_product_details');
 
-Route::post('/add_user_order/{id}', [UserController::class, 'add_user_order']) ->name('add_user_order');
+Route::post('/add_user_order/{id}', [UserController::class, 'add_user_order']) ->middleware(['auth', 'verified'])
+    ->name('add_user_order');
+
+Route::get('/confirm_order', [UserController::class, 'confirm_order']) ->name('confirm_order');
 
 // user controller end here 
 
