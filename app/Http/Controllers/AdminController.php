@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\UserOrder;
 use RealRashid\SweetAlert\Facades\Alert;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -172,7 +173,8 @@ class AdminController extends Controller
     public function Orders(){
         $products = Product::all();
         $orders = Order::all();
-        return view('admin.order', compact('products', 'orders'));
+        $users_products = UserOrder::with(['user', 'product'])->get()->unique('user_id');
+        return view('admin.order', compact('products', 'orders', 'users_products'));
     }
 
     public function add_order($id){
@@ -245,6 +247,27 @@ class AdminController extends Controller
 
     public function clear_order(){
         Order::query()->delete();
+        return redirect()->back();
+    }
+
+    public function getUserOrders($userId){
+    $orders = UserOrder::with(['product', 'user'])
+                        ->where('user_id', $userId)
+                        ->get();
+
+    $userEmail = $orders->first()?->user?->email ?? 'N/A';
+
+    return response()->json([
+        'success' => true,
+        'user_email' => $userEmail,
+        'data' => $orders
+    ]);
+    }
+
+    public function bill_status($id){
+        $currentOrder = UserOrder::findOrFail($id);
+        UserOrder::where('user_id', $currentOrder->user_id)
+             ->update(['order_process' => 'Completed']);
         return redirect()->back();
     }
 }

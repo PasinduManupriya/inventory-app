@@ -111,6 +111,10 @@ Route::get('/search_iterm', [AdminController::class, 'search_iterm'])->middlewar
 Route::get('/order_clear', [AdminController::class, 'clear_order'])->middleware(['auth', 'verified'])
     ->name('admin.clear_order');
 
+Route::get('/get-user-orders/{userId}', [AdminController::class, 'getUserOrders'])->middleware(['auth', 'verified']);
+
+Route::get('/bill_status/{id}', [AdminController::class, 'bill_status'])->middleware(['auth', 'verified']);
+
 // admin controller end here 
 
 

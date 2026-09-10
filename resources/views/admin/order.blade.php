@@ -83,6 +83,124 @@
         </div>
     </div>
 
+<!-- User Order Details -->
+
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border border-gray-300 dark:border-gray-600">
+                        <thead id="table-head" class="bg-gray-50 dark:bg-gray-700">
+                            <tr class="text-white dark:text-white">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">User Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Bill Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                            @foreach($users_products as $users_product)
+                                <tr class="text-white dark:text-white">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $users_product->user?->name ?? 'No User' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs fetch-user-orders" data-id="{{ $users_product->user_id }}">
+                                            View Order
+                                        </button>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="{{url('bill_status/'. $users_product->id)}}" style="background-color:green; color:white; padding:5px 10px; border-radius: 8px; cursor: pointer;">Completed</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Order Details -->
+
+<!-- jQuery Script -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.fetch-user-orders', function(e) {
+            e.preventDefault(); 
+            
+            let userId = $(this).attr('data-id');
+            console.log("Clicked User ID:", userId); 
+
+            if(!userId) {
+                alert("User ID එක හමුවූයේ නැත!");
+                return;
+            }
+
+            $.ajax({
+                url: '/get-user-orders/' + userId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    console.log("Response Received:", response);
+
+                    if (response.success && response.data.length > 0) {
+                        let newHeader = `
+                            <tr class="text-white dark:text-white">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Item Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Quantity</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Descripton</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Image</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Action</th>
+                            </tr>
+                        `;
+                        $('#table-head').html(newHeader);
+                        let newBody = '';
+                        $.each(response.data, function(key, order) {
+
+                            let productObj = order.product || order.Product;
+
+                            let productName = productObj ? productObj.product_name : 'N/A';
+                            let productQuantity = order.product_quantity ?? 'N/A';
+                            let productDescription = productObj ? productObj.product_description : 'N/A';
+
+                            let imageName = productObj ? (productObj.image || productObj.product_image || productObj.photo) : null;
+                            let imageElement = imageName 
+                                ? `<img src="/db_img/${imageName}" class="w-12 h-12 object-cover rounded" alt="Product Image">` 
+                                : `<span class="text-gray-400">No Image</span>`;
+                            newBody += `
+                                <tr class="text-white dark:text-white">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">${productName}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">${productQuantity}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">${productDescription}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">${imageElement}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <button type="button" onclick="location.reload()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                            Back
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#table-body').html(newBody);
+
+                    } else {
+                        alert('Not Order');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", xhr.responseText);
+                    alert('Error: ' + xhr.status + ' - ' + error);
+                }
+            });
+        });
+    });
+</script>
+
+<!-- jQuery Script -->
+
 <!-- product -->
 
  <div class="py-12">
