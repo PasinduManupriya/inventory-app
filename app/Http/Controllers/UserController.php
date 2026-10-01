@@ -40,13 +40,13 @@ class UserController extends Controller
 
     public function cart(){
         $user_id = Auth::id();
-        $cart_items = UserOrder::where('user_id', $user_id) -> with('product')->get();
+        $cart_items = User_order::where('user_id', $user_id) -> with('product')->get();
         return view('home.cart', compact('cart_items'));
     }
 
     public function order(){
         $user_id = Auth::id();
-        $items = User_order::with(['user', 'product'])-> where('user_id', Auth::id()) -> get();
+        $items = UserOrder::with(['user', 'product'])-> where('user_id', Auth::id()) -> get();
         return view('home.order', compact('items'));
     }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
     }
 
     public function add_user_order($id, Request $request){
-        $user_order = new UserOrder();
+        $user_order = new User_order();
         $user_order->user_id = Auth::id();
         $user_order->product_id = $id;
         $user_order->user_product_quantity = $request->quantity;
@@ -67,9 +67,9 @@ class UserController extends Controller
 
     public function confirm_order(){
         $user_id = Auth::id();
-        $cart_item = UserOrder::where('user_id',$user_id)->get();
+        $cart_item = User_order::where('user_id',$user_id)->get();
         foreach($cart_item as $cart_item){
-            $c_item = new User_order;
+            $c_item = new UserOrder;
             $c_item -> user_id = $cart_item -> user_id; 
             $c_item -> product_id = $cart_item -> product_id;
             $c_item -> product_quantity = $cart_item -> user_product_quantity;
