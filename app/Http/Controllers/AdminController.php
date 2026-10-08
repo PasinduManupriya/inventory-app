@@ -7,9 +7,12 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\UserOrder;
 use RealRashid\SweetAlert\Facades\Alert;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Notifications\SendEmailNotification;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -269,5 +272,36 @@ class AdminController extends Controller
         UserOrder::where('user_id', $currentOrder->user_id)
              ->update(['order_process' => 'Completed']);
         return redirect()->back();
+    }
+
+    public function send_email($id){
+        $user_data = User::findOrFail($id);
+        return view('admin.email', compact('user_data'));
+    }
+
+    public function send_email_details($id, Request $request){
+        $request->validate([
+            'pdf_file' => 'nullable|mimes:pdf|max:10240', 
+        ]);
+
+        $details = [
+            'greeting'   => $request->greeting,
+            'first_line' => $request->s_line,
+            'body'       => $request->body,
+            'url'        => $request->url,
+            'pdf_path'   => null,
+            'pdf_name'   => null,
+            'last_line'  => $request->l_line
+        ];
+        if ($request->hasFile('pdf_file')) {
+            $file = $request->file('pdf_file');
+            
+            $details['pdf_data'] = file_get_contents($file->getRealPath());
+            $details['pdf_name'] = $file->getClientOriginalName();
+        }
+
+        $user_data = User::findOrFail($id);
+        Notification::send($user_data, new SendEmailNotification($details));
+        return back()->with('message', 'Email Sent Successfully!');
     }
 }

@@ -115,6 +115,10 @@ Route::get('/get-user-orders/{userId}', [AdminController::class, 'getUserOrders'
 
 Route::get('/bill_status/{id}', [AdminController::class, 'bill_status'])->middleware(['auth', 'verified']);
 
+Route::get('/send_email/{id}', [AdminController::class, 'send_email'])->middleware(['auth', 'verified']);
+
+Route::post('/send_email_details/{id}', [AdminController::class, 'send_email_details'])->middleware(['auth', 'verified']);
+
 // admin controller end here 
 
 

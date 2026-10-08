@@ -95,6 +95,7 @@
                             <tr class="text-white dark:text-white">
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">User Name</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Send Email</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Bill Status</th>
                             </tr>
                         </thead>
@@ -106,6 +107,9 @@
                                         <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs fetch-user-orders" data-id="{{ $users_product->user_id }}">
                                             View Order
                                         </button>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="{{url('send_email',$users_product->user_id)}}" style="background-color:green; color:white; padding:5px 10px; border-radius: 8px; cursor: pointer;">Send Email</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                                         <a href="{{url('bill_status/'. $users_product->id)}}" style="background-color:green; color:white; padding:5px 10px; border-radius: 8px; cursor: pointer;">Completed</a>
